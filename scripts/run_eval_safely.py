@@ -12,7 +12,7 @@ os.environ["PYTHONPATH"] = f"{libero_path}:{os.environ.get('PYTHONPATH', '')}"
 
 subprocess.run([
     *python_cmd,
-    "eval/eval_libero.py",
+    "vla0/eval/eval_libero.py",
     "--model_path", "/kaggle/working/local_qwen_model/pytorch_model.pth",  
     "--task_suite_name", "libero_goal",
     "--task_name", "put_the_wine_bottle_on_top_of_the_cabinet"
