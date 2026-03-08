@@ -1,20 +1,26 @@
 #!/bin/bash
+set -e  # Exit on error
 
-# Kaggle VLA-0 FULL environment
 cd /kaggle/working/Algoverse_VLA0_Reproduction
 
-# Core deps
-pip install -q robosuite==1.4.0 mujoco gymnasium torch torchvision transformers
+# Core robotics deps
+pip install -q "robosuite[rendering]==1.4.0" mujoco==3.1.6 gymnasium
 
-# Clone + install RoboVerse (has evals.libero)
-git clone https://github.com/RoboVerseOrg/RoboVerse.git roboverse_full
-pip install -e ./roboverse_full
+# RoboVerse FULL source install (has evals.libero)
+git clone https://github.com/RoboVerseOrg/RoboVerse.git roboverse_source
+cd roboverse_source
+pip install -e ".[il]"  # Imitation learning (evals.libero)
+cd ..
 
-# Clone + install LIBERO
+# LIBERO install
 cd vla0/libs
 pip install -e LIBERO
+cd ../..
 
-# VLA-0 paths
-export PYTHONPATH="${PYTHONPATH}:$(pwd)/../vla0:$(pwd)/../vla0/libs/LIBERO"
+# VLA-0 + paths
+pip install -e vla0
+export PYTHONPATH="${PYTHONPATH}:$(pwd)/vla0:$(pwd)/roboverse_source"
 
-echo "✅ FULL VLA-0 environment ready!"
+echo "✅ VLA-0 + RoboVerse + LIBERO ready!"
+python -c "from roboverse.evals.libero.eval import eval; print('✅ roboverse.evals.libero OK!')"
+
