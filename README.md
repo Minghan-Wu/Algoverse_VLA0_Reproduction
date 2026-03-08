@@ -2,6 +2,10 @@
 
 ## How to run on Kaggle
 
+0. **Clone dependencies**:
+   ```bash
+   !bash setup/clone_deps.sh
+
 1. **Clone this repo**
    ```bash
    !git clone https://github.com/Minghan‑Wu/Algoverse_VLA0_Reproduction.git
