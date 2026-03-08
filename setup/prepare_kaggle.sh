@@ -1,5 +1,7 @@
 #!/bin/bash
 # Run this AFTER downloading the model with download_qwen_model.py
+pip install roboverse robosuite==1.4.0 mujoco gymnasium lerobot
+echo "✅ Kaggle env ready!
 
 set -e  # Exit on any error
 
